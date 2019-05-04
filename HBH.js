@@ -33,7 +33,7 @@ var HBH_moves = [
 	["Dive", 6],
 	["Breath", 10],
 	["Jump", 3],
-	["Breath", 8, "S"], // 2:00 //14 and 1 worked
+	["Breath", 8], // 2:00 //14 and 1 worked
 	["Volcano 1", 4, "S"], // 1:52
 	["Dash", 1, "S"],	// 1:48
 	["Swipe", 2, "S"], //1:47
