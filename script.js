@@ -86,26 +86,28 @@ class Manager {
 	}
 
 	break() {
-		this.break_state = 0;
-		this.queued_moves = [];
-		this.queued_moves.push(this.stage.break_timeline[this.break_state]);
+		if (this.break_state == -1) {
+			this.break_state = 0;
+			this.queued_moves = [];
+			this.queued_moves.push(this.stage.break_timeline[this.break_state]);
 
-		for (var index = 0; index < this.stage.break_timings.length; index++) {
-			var timing = this.stage.break_timings[index]
-			var temp_time = this.clock.get_remaining()
-			if (temp_time >= timing[0] * 1000 && temp_time < timing[1] * 1000) {
-				this.stage.break_timeline[this.stage.break_timeline.length - 1][1] = timing[2]
+			for (var index = 0; index < this.stage.break_timings.length; index++) {
+				var timing = this.stage.break_timings[index]
+				var temp_time = this.clock.get_remaining()
+				if (temp_time >= timing[0] * 1000 && temp_time < timing[1] * 1000) {
+					this.stage.break_timeline[this.stage.break_timeline.length - 1][1] = timing[2]
+				}
 			}
-		}
 
-		if (this.clock.get_elapsed() - 2 * 1000 >= this.counter) {
-			this.current_move_index ++;
-		}
+			if (this.clock.get_elapsed() - 2 * 1000 >= this.counter) {
+				this.current_move_index ++;
+			}
 
-		while(this.stage.moves[this.current_move_index].length == 3 && this.stage.moves[this.current_move_index][2] == "S") {
-			this.current_move_index ++;
+			while(this.stage.moves[this.current_move_index].length == 3 && this.stage.moves[this.current_move_index][2] == "S") {
+				this.current_move_index ++;
+			}
+			this.counter = this.clock.get_elapsed();
 		}
-		this.counter = this.clock.get_elapsed();
 	}
 
 	check_moves() {
